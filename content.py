@@ -25,5 +25,5 @@ def main():
                 video.append(content['video_url'])
         
 
-
-main()
+if __name__ == '__main__':
+    main()

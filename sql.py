@@ -13,12 +13,16 @@ def sql_create_table(connection):
     connection.close()
     return
 
+
 def sql_insert_data(connection, data):
     cursor = connection.cursor()
-    cursor.execute("""INSERT INTO homepage (mask_id, title, create_time, cover_img_url) VALUES (?, ?, ?, ?)""", data)
+    cursor.executemany()
+    cursor.executemany("""INSERT INTO homepage (mask_id, title, create_time, cover_img_url) VALUES (?, ?, ?, ?)""",
+                       data)
     connection.commit()
     connection.close()
     return
+
 
 def sql_select_data(connection):
     cursor = connection.cursor()

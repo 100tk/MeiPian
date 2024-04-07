@@ -17,8 +17,10 @@ def get_input():
 def main():
     
     with httpx.Client() as client:
+
         # 获取输入的ID或URL
         user_id = get_input()
+        
         # 构造请求URL
         url = f"https://www.meipian.cn/service/user/{user_id}/article/open-list"
         headers = {"User-Agent": "Opera/9.80 (iPhone; Opera Mini/8.0.0/34.2336; U; en) Presto/2.8.119 Version/11.10"}
@@ -28,19 +30,25 @@ def main():
         page = 0
 
         while True:
-
+            # 发送请求
             response = client.get(url=url, headers=headers, params=params)
 
+            # 检查响应状态码
             if response.status_code != 200:
                 raise Exception(f"请求失败，状态码：{response.status_code}")
             
+            # 解析响应
             try:
                 data = response.json()
+
+            # 如果无法解析JSON数据，抛出异常
             except json.JSONDecodeError:
                 raise Exception("无法解析JSON数据")
             
             # 提取并处理当前页的数据
             page_data = data.get("data", [])
+
+            # 将当前页的数据添加到总列表中
             article_data.extend(page_data)
 
             # 当数据不足20条或没有新数据时，停止循环
