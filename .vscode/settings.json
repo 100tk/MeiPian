@@ -1,0 +1,9 @@
+{
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.analysis.completeFunctionParens": true,
+    "python.globalModuleInstallation": true,
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.shellIntegration.enabled": true,
+    "python.analysis.autoImportCompletions": true,
+    "explorer.excludeGitIgnore": true
+}
