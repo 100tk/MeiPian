@@ -1,9 +1,14 @@
 {
+    "explorer.excludeGitIgnore": true,
     "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.analysis.autoIndent": true,
+    "python.analysis.inlayHints.callArgumentNames": "partial",
+    "python.analysis.inlayHints.variableTypes": true,
     "python.analysis.completeFunctionParens": true,
-    "python.globalModuleInstallation": true,
-    "python.terminal.activateEnvironment": true,
-    "python.terminal.shellIntegration.enabled": true,
     "python.analysis.autoImportCompletions": true,
-    "explorer.excludeGitIgnore": true
+    "python.analysis.autoFormatStrings": true,
+    "python.globalModuleInstallation": true,
+    "python.terminal.shellIntegration.enabled": true,
+    "debugpy.showPythonInlineValues": true,
+    "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
 }
