@@ -7,13 +7,14 @@
     "python.analysis.inlayHints.callArgumentNames": "partial",
     "python.analysis.inlayHints.variableTypes": true,
     "python.analysis.completeFunctionParens": true,
-    "python.analysis.autoImportCompletions": true,
     "python.analysis.autoFormatStrings": true,
     "python.globalModuleInstallation": true,
     "python.terminal.shellIntegration.enabled": true,
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "editor.autoClosingDelete": "auto"
       },
     "debugpy.showPythonInlineValues": true,
+    "python.analysis.extraCommitChars": true,
 }
