@@ -11,4 +11,5 @@
     "python.terminal.shellIntegration.enabled": true,
     "debugpy.showPythonInlineValues": true,
     "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
+    "editor.formatOnType": true,
 }

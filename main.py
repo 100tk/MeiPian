@@ -90,12 +90,12 @@ def main() -> None:
             print('插入数据中------------------------------------------') 
             
 
+
+            # 更新请求参数，以便下一次请求获取下一页数据
+            params["last_mask_id"] = page_data[-1]["mask_id"]
             # 当数据不足20条或没有新数据时，停止循环
             if not page_data or len(page_data) < 20:
                 break
-            else:
-                # 更新请求参数，以便下一次请求获取下一页数据
-                params["last_mask_id"] = page_data[-1]["mask_id"]
         conn.commit()
         conn.close()
 
