@@ -1,5 +1,7 @@
 {
+    "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
     "explorer.excludeGitIgnore": true,
+    "editor.formatOnType": true,
     "python.analysis.inlayHints.functionReturnTypes": true,
     "python.analysis.autoIndent": true,
     "python.analysis.inlayHints.callArgumentNames": "partial",
@@ -9,7 +11,9 @@
     "python.analysis.autoFormatStrings": true,
     "python.globalModuleInstallation": true,
     "python.terminal.shellIntegration.enabled": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
+      },
     "debugpy.showPythonInlineValues": true,
-    "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
-    "editor.formatOnType": true,
 }
