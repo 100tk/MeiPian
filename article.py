@@ -22,9 +22,25 @@ def main():
                 )
                 data: Dict[str, List[Dict[str, str]]] = response.json()
                 page: List[Dict[str, str]] = data["data"]
-                if not page or len(page) > 20:
-                    break
+                items: List[Dict[str, str]] = [
+                    {
+                        "user_id": user_id,
+                        "mask_id": item["mask_id"],
+                        "create_time": item["create_time"],
+                        "url": f"https://www.meipian.cn/{item['mask_id']}",
+                        "title": item["title"].replace(" ", ""),
+                        "cover_img_url": item["cover_img_url"],
+                    }
+                    for item in page
+                ]
+                # 保存数据到文件
+                with open(f"article_{user_id}.json", "a", encoding="utf-8") as f:
+                    f.write(json.dumps(items, ensure_ascii=False) + "\n")
+
                 params["last_mask_id"] = page[-1]["mask_id"]
+                if not page or len(page) < 20:
+                    break
+
             except httpx.HTTPStatusError():
                 break
             except json.JSONDecodeError():
@@ -34,4 +50,4 @@ def main():
 
 
 if __name__ == "__main__":
-    pass
+    main()
