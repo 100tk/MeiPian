@@ -1,20 +1,16 @@
-import sqlite3
+from sqlalchemy import create_engine
+from sqlalchemy import Table, Column, Integer, String, MetaData
 
+# 创建数据库引擎
+engine = create_engine("sqlite:///meipian.db", echo=True)
+metdata = MetaData()
+# 创建一个数据表
+users = Table(
+    "users",
+    metdata,
+    Column("user_id", Integer),
+    Column("mask_id", String, primary_key=True),
+    Column("age", Integer),
+)
 
-class SQLiteDB:
-    def __init__(self, db_name) -> None:
-        self.conn = sqlite3.connect(database=db_name)
-        self.curor = self.conn.cursor()
-
-    def create_table(self):
-        """
-        创建一个新表。
-        """
-        query = """--sql
-        CREATE TABLE IF NOT EXISTS article(
-            mask_id PRIMARY KEY,
-            user_id TEXT,
-        );
-        
-        
-        """
+metdata.create_all(engine)

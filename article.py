@@ -41,10 +41,10 @@ def main():
                 if not page or len(page) < 20:
                     break
 
-            except httpx.HTTPStatusError():
-                break
-            except json.JSONDecodeError():
-                break
+            except httpx.HTTPStatusError as e:
+                print(f"HTTP状态错误:{e}")
+            except json.JSONDecodeError as e:
+                print(f"JSON解析错误:{e}")
             finally:
                 time.sleep(0.5)
 
