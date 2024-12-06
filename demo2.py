@@ -27,7 +27,7 @@ def create_table(conn, create_table_sql):
 
 def insert_article(conn, article):
     """Insert a single article into the articles table."""
-    sql = """
+    sql = """--sql
         INSERT INTO articles (user_id, mask_id, title, cover, views, likes, comments, shares, created_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     """

@@ -1,28 +1,45 @@
-from typing import Dict, List, Any, AnyStr
-
+from pprint import pprint
 import time
 import json
 import httpx
+import sqlite3
+
+
+con = sqlite3.connect("meipian.db")
+cur = con.cursor()
+cur.execute(
+    """
+        create table if not exists article
+        (
+            user_id       integer                            not null,
+            mask_id       text primary key                   not null,
+            create_time   integer                            not null,
+            url           text                               not null,
+            title         text                               not null,
+            cover_img_url text                               not null,
+            is_down       integer default 0                  not null,
+            check ( is_down in (0, 1)) 
+        );
+    """
+)
 
 
 def main():
 
-    user_id: int = 36679026
-    url: str = f"https://www.meipian.cn/service/user/{user_id}/article/open-list"
-    headers: Dict[str, str] = {
+    user_id = 4798939
+    url = f"https://www.meipian.cn/service/user/{user_id}/article/open-list"
+    headers = {
         "User-Agent": "Opera/9.80 (iPhone; Opera Mini/8.0.0/34.2336; U; en) Presto/2.8.119 Version/11.10"
     }
-    params: Dict[str, int] = {"last_mask_id": 0}
+    params = {"last_mask_id": 0}
 
     with httpx.Client() as client:
         while True:
             try:
-                response: httpx.Response = client.get(
-                    url=url, headers=headers, params=params
-                )
-                data: Dict[str, List[Dict[str, str]]] = response.json()
-                page: List[Dict[str, str]] = data["data"]
-                items: List[Dict[str, str]] = [
+                response = client.get(url=url, headers=headers, params=params)
+                data = response.json()
+                page = data["data"]
+                items = [
                     {
                         "user_id": user_id,
                         "mask_id": item["mask_id"],
@@ -33,10 +50,14 @@ def main():
                     }
                     for item in page
                 ]
-                # 保存数据到文件
-                with open(f"article_{user_id}.json", "a", encoding="utf-8") as f:
-                    f.write(json.dumps(items, ensure_ascii=False) + "\n")
-
+                cur.executemany(
+                    """
+                        INSERT INTO article (user_id,mask_id,create_time,url,title,cover_img_url)
+                        VALUES (:user_id,:mask_id,:create_time,:url,:title,:cover_img_url)
+                    """,
+                    items,
+                )
+                pprint("插入数据中----------------------------")
                 params["last_mask_id"] = page[-1]["mask_id"]
                 if not page or len(page) < 20:
                     break
@@ -46,7 +67,9 @@ def main():
             except json.JSONDecodeError as e:
                 print(f"JSON解析错误:{e}")
             finally:
-                time.sleep(0.5)
+                pass
+    con.commit()
+    con.close()
 
 
 if __name__ == "__main__":

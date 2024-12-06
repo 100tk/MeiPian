@@ -1,16 +1,10 @@
-from sqlalchemy import create_engine
-from sqlalchemy import Table, Column, Integer, String, MetaData
-
-# 创建数据库引擎
-engine = create_engine("sqlite:///meipian.db", echo=True)
-metdata = MetaData()
-# 创建一个数据表
-users = Table(
-    "users",
-    metdata,
-    Column("user_id", Integer),
-    Column("mask_id", String, primary_key=True),
-    Column("age", Integer),
-)
-
-metdata.create_all(engine)
+def get_input():
+    while True:
+        input_str = input("输入用户ID或主页URL：")
+        if input_str.isdigit():
+            return input_str
+        match = re.match(r"https?://www\.meipian\.cn/c/(\d+)", input_str)
+        if match:
+            return match.group(1)
+        else:
+            print("输入无效，请重新输入。")
