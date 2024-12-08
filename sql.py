@@ -1,3 +1,8 @@
+import re
+import sqlite3
+import time
+
+
 def get_input():
     while True:
         input_str = input("输入用户ID或主页URL：")
@@ -8,3 +13,7 @@ def get_input():
             return match.group(1)
         else:
             print("输入无效，请重新输入。")
+
+
+if __name__ == "__main__":
+    pass

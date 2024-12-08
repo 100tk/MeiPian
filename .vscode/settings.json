@@ -1,18 +1,17 @@
 {
     "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
-    "explorer.excludeGitIgnore": true,
-    "editor.formatOnType": false,
-    "python.analysis.inlayHints.functionReturnTypes": true,
+    "workbench.colorCustomizations": {
+      "editorIndentGuide.activeBackground1":"#eb0404"
+    },
+    "python.terminal.activateEnvironment": false,
     "python.analysis.autoIndent": true,
-    "python.analysis.inlayHints.callArgumentNames": "off",
-    "python.analysis.inlayHints.variableTypes": true,
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.analysis.inlayHints.variableTypes": false,
     "python.analysis.completeFunctionParens": true,
     "python.analysis.autoFormatStrings": true,
-    "python.globalModuleInstallation": true,
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.formatOnSave": true,
-        "editor.autoClosingDelete": "auto"
       },
-    "python.terminal.activateEnvironment": false
+    "black-formatter.args": ["--line-length", "120"]
 }
